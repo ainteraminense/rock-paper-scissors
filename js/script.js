@@ -29,6 +29,12 @@ function getHumanChoice() {
 //DISPLAY human choice
 console.log(getHumanChoice());
 
+//CREATE variables for human and computer scores
+//INIT the variables with 0
+let humanScore = 0
+let computerScore = 0;
+
+
 //REUSED function
 function translateNumberToChoice(number) {
 switch (number) {
