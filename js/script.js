@@ -29,13 +29,8 @@ function getHumanChoice() {
 //DISPLAY human choice
 //console.log(getHumanChoice);
 
-//CREATE variables for human and computer scores
-//INIT the variables with 0
-let humanScore = 0
-let computerScore = 0;
-
 //CREATE function to compare the computer and human choices
-function playRound(humanChoice, computerChoice) {
+function playRound(humanChoice, computerChoice, increaseScore) {
     humanChoice = humanChoice.toLowerCase();
 
     let winner;
@@ -78,25 +73,55 @@ function playRound(humanChoice, computerChoice) {
     //DISPLAY winner
     // INCREMENT the score
     if (winner == "human") {
-    console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-    humanScore++; 
+    alert(`You win! ${humanChoice} beats ${computerChoice}`);
+    increaseScore(winner); 
     } else if(winner == "computer") {
-        console.log(`You lost! ${computerChoice} beats ${humanChoice}`);
-        computerScore++;
+        alert(`You lost! ${computerChoice} beats ${humanChoice}`);
+        increaseScore(winner);
     } else {
-        console.log(`It's a draw! You both chose ${humanChoice}`);
+        alert(`It's a draw! You both chose ${humanChoice}`);
     }
 }
 
-const humanSelection = getHumanChoice();
-//console.log("human selection: " + humanSelection);
-const computerSelection = getComputerChoice();
-//console.log("computer selection: " + computerSelection);
 
 
-playRound(humanSelection, computerSelection);
+//FOR 5 rounds play the game
+function playGame() {
 
+//CREATE variables for human and computer scores
+//INIT the variables with 0
+let humanScore = 0
+let computerScore = 0;
 
+function increaseScore(winner) {
+    if(winner == "human") {
+        humanScore++;
+    } else if(winner == "computer") {
+        computerScore++;
+    }
+}
+
+for(let i = 0; i < 5; i++) {
+    let humanSelection = getHumanChoice();
+    let computerSelection = getComputerChoice();
+    playRound(humanSelection, computerSelection, increaseScore);
+}
+if (humanScore > computerScore) {
+    alert(`Congratulations! You won the game!
+    human: ${humanScore}
+    computer: ${computerScore}`);
+} else if(computerScore > humanScore) {
+    alert(`Alas! The computer won the game!
+    human: ${humanScore}
+    computer: ${computerScore}`);
+} else {
+    alert(`Guacamole! It's a tie!
+    human: ${humanScore}
+    computer: ${computerScore}`);
+}
+}
+
+playGame();
 //REUSED function
 function translateNumberToChoice(number) {
 switch (number) {
